@@ -1,7 +1,20 @@
 class ScheduleSerializer
   include JSONAPI::Serializer
-  attributes :id, :title, :date
+
+  attributes :title, :date
 
   has_many :users
-  has_many :shows
+
+  attribute :shows do |schedule|
+    schedule.shows.map do |show|
+      {
+        id: show.id,
+        artist: show.artist,
+        location: show.location,
+        date: show.date,
+        time: show.time
+      }
+    
+    end
+  end
 end
