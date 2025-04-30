@@ -3,7 +3,16 @@ class ScheduleSerializer
 
   attributes :title, :date
 
-  has_many :users
+  attribute :users do |schedule|
+    schedule.users.map do |user|
+      {
+        id: user.id,
+        first_name: user.first_name,
+        last_name: user.last_name,
+        email: user.email
+      }
+    end
+  end
 
   attribute :shows do |schedule|
     schedule.shows.map do |show|
