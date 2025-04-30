@@ -12,5 +12,7 @@ class Api::V1::SchedulesController < ApplicationController
 
         schedule.shows.destroy(show)
         head :no_content # using to get 204 status code 
+    rescue ActiveRecord::RecordNotFound
+        render json: { error: 'Schedule or Show not found' }, status: :not_found
     end
 end
