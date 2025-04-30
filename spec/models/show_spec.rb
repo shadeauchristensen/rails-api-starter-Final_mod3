@@ -1,5 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Show, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'relationships' do
+    it { should have_many :schedule_shows }
+    it { should have_many(:schedules).through(:schedule_shows) }
+  end
 end
